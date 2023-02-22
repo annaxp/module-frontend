@@ -10,29 +10,39 @@ const CountersList = () => {
     { id: 4, value: 0, name: "Набор минималиста" },
   ];
 
-  const [counters, setCounter] = useState(initialState);
-
+  const [counters, setCounters] = useState(initialState);
   const handleDelete = (id) => {
     const newCounters = counters.filter((c) => c.id !== id);
-    setCounter(newCounters);
+    setCounters(newCounters);
   };
   const handleReset = () => {
-    console.log("handle reset");
-    setCounter(initialState);
+    setCounters(initialState);
   };
 
+  // const handleIncrement = (id) => {
+  //   const newCounters = counters.map((item) =>
+  //     item.id === id ? { ...item, value: item.value + 1 } : item
+  //   );
+  //   setCounter(newCounters);
+  // };
+
+  // const handleDecrement = (id) => {
+  //   const newCounters = counters.map((item) =>
+  //     item.id === id ? { ...item, value: item.value - 1 } : item
+  //   );
+  //   setCounter(newCounters);
+  // };
   const handleIncrement = (id) => {
-    const newCounters = counters.map((item) =>
-      item.id === id ? { ...item, value: item.value + 1 } : item
-    );
-    setCounter(newCounters);
+    const elementIndex = counters.findIndex((c) => c.id === id);
+    const newCounters = [...counters];
+    newCounters[elementIndex].value++;
+    setCounters(newCounters);
   };
-
   const handleDecrement = (id) => {
-    const newCounters = counters.map((item) =>
-      item.id === id ? { ...item, value: item.value - 1 } : item
-    );
-    setCounter(newCounters);
+    const elementIndex = counters.findIndex((c) => c.id === id);
+    const newCounters = [...counters];
+    newCounters[elementIndex].value--;
+    setCounters(newCounters);
   };
 
   return (
